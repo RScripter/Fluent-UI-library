@@ -55,8 +55,8 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the Scrolling Frame on the left side (Tabs Frame)
     local leftFrame = Instance.new("ScrollingFrame")
-    leftFrame.Size = UDim2.new(0.2, 0, 0.7, 0)
-    leftFrame.Position = UDim2.new(0.025, 0, 0.25, 0) -- Adjusted to ensure it fits well below the tabsLabel
+    leftFrame.Size = UDim2.new(0.2, 0, 0.7, 0) -- Adjusted to match the height of mainFrame
+    leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0) -- Adjusted to align with tabsLabel
     leftFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     leftFrame.BackgroundTransparency = 0.5
     leftFrame.BorderSizePixel = 2
@@ -70,17 +70,6 @@ function uiLibrary:MakeWindow(windowInfo)
     listLayout.Parent = leftFrame
     listLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    -- Ensure titleLabel width matches the mainFrame width
-    titleLabel.Size = UDim2.new(0.75, 0, 0.1, 0)
-    titleLabel.Position = UDim2.new(0.25, 0, 0.05, 0)
-
-    -- Ensure tabsLabel is properly positioned and not touching the mainFrame
-    tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0)
-
-    -- Ensure leftFrame is positioned properly and not touching the mainFrame
-    leftFrame.Position = UDim2.new(0.025, 0, 0.25, 0)
-    
     -- Store references for future use
     uiLibrary.leftFrame = leftFrame
     uiLibrary.mainFrame = mainFrame
@@ -148,7 +137,7 @@ function uiLibrary:addButton(buttonInfo)
     end
 
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, -10, 0.1, 0)
+    button.Size = UDim2.new(1, -10, 0.1, 0) -- Size similar to tab buttons
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BackgroundTransparency = 0.5
     button.Text = buttonName
@@ -178,12 +167,12 @@ function uiLibrary:addLabel(labelInfo)
     local tabContent = uiLibrary.tabs[tabName]
     if not tabContent then
         warn("Tab not found: " .. tabName)
-return
+        return
     end
 
     -- Create a TextLabel for the tab
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, -10, 0.1, 0)
+    label.Size = UDim2.new(1, -10, 0.1, 0) -- Size similar to tab buttons
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
     label.Text = labelName
@@ -196,7 +185,7 @@ return
 
     -- Update tab content size
     tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-
+    
     -- Ensure CanvasSize updates when new elements are added
     tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
