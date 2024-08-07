@@ -22,7 +22,7 @@ function uiLibrary:MakeWindow(windowInfo)
     titleLabel.Text = windowName
     titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     titleLabel.TextScaled = true
-    titleLabel.TextSize = 10
+    titleLabel.TextSize = 14
     titleLabel.BorderSizePixel = 2
     titleLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
     titleLabel.Parent = screenGui
@@ -36,7 +36,7 @@ function uiLibrary:MakeWindow(windowInfo)
     tabsLabel.Text = "Tabs"
     tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     tabsLabel.TextScaled = true
-    tabsLabel.TextSize = 10
+    tabsLabel.TextSize = 14
     tabsLabel.BorderSizePixel = 2
     tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
     tabsLabel.Parent = screenGui
@@ -56,14 +56,19 @@ function uiLibrary:MakeWindow(windowInfo)
     -- Create the Scrolling Frame on the left side (Tabs Frame)
     local leftFrame = Instance.new("ScrollingFrame")
     leftFrame.Size = UDim2.new(0.2, 0, 0.7, 0)
-    leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0)
+    leftFrame.Position = UDim2.new(0.025, 0, 0.25, 0) -- Adjusted to ensure it fits well below the tabsLabel
     leftFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     leftFrame.BackgroundTransparency = 0.5
     leftFrame.BorderSizePixel = 2
     leftFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    leftFrame.CanvasSize = UDim2.new(0, 0, 2, 0)
+    leftFrame.CanvasSize = UDim2.new(0, 0, 0, 0) -- Adjusted for proper UIListLayout functionality
     leftFrame.ScrollBarThickness = 10
     leftFrame.Parent = screenGui
+
+    -- Create UIListLayout for the leftFrame
+    local listLayout = Instance.new("UIListLayout")
+    listLayout.Parent = leftFrame
+    listLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
     -- Ensure titleLabel width matches the mainFrame width
     titleLabel.Size = UDim2.new(0.75, 0, 0.1, 0)
@@ -74,7 +79,7 @@ function uiLibrary:MakeWindow(windowInfo)
     tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0)
 
     -- Ensure leftFrame is positioned properly and not touching the mainFrame
-    leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0)
+    leftFrame.Position = UDim2.new(0.025, 0, 0.25, 0)
     
     -- Store references for future use
     uiLibrary.leftFrame = leftFrame
@@ -95,7 +100,7 @@ function uiLibrary:addTab(tabInfo)
     newTabButton.Text = tabName
     newTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     newTabButton.TextScaled = true
-    newTabButton.TextSize = 10
+    newTabButton.TextSize = 14
     newTabButton.TextStrokeTransparency = 0
     newTabButton.BorderSizePixel = 2
     newTabButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
@@ -149,7 +154,7 @@ function uiLibrary:addButton(buttonInfo)
     button.Text = buttonName
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
     button.TextScaled = true
-    button.TextSize = 10
+    button.TextSize = 14
     button.BorderSizePixel = 2
     button.BorderColor3 = Color3.fromRGB(255, 255, 255)
     button.Parent = tabContent
@@ -173,9 +178,10 @@ function uiLibrary:addLabel(labelInfo)
     local tabContent = uiLibrary.tabs[tabName]
     if not tabContent then
         warn("Tab not found: " .. tabName)
-        return
+return
     end
 
+    -- Create a TextLabel for the tab
     local label = Instance.new("TextLabel")
     label.Size = UDim2.new(1, -10, 0.1, 0)
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -183,7 +189,7 @@ function uiLibrary:addLabel(labelInfo)
     label.Text = labelName
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.TextScaled = true
-    label.TextSize = 10
+    label.TextSize = 14
     label.BorderSizePixel = 2
     label.BorderColor3 = Color3.fromRGB(255, 255, 255)
     label.Parent = tabContent
