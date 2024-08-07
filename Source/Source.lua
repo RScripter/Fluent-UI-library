@@ -43,7 +43,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
-    mainFrame.Size = UDim2.new(0.75, 0, 0.7, 0) -- Wider to the right
+    mainFrame.Size = UDim2.new(0.75, 0, 0.7, 0) -- Adjusted width to fit within the window
     mainFrame.Position = UDim2.new(0.25, 0, 0.15, 0)
     mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     mainFrame.BackgroundTransparency = 0.5
@@ -166,36 +166,35 @@ function uiLibrary:addButton(buttonInfo)
 end
 
 -- Function to add a label to a tab
-    function uiLibrary:addLabel(labelInfo)
-        local tabName = labelInfo.TabName
-        local labelName = labelInfo.Name
-        
-        local tabContent = uiLibrary.tabs[tabName]
-        if not tabContent then
-            warn("Tab not found: " .. tabName)
-            return
-        end
-
-        local label = Instance.new("TextLabel")
-        label.Size = UDim2.new(1, -10, 0.1, 0)
-        label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        label.BackgroundTransparency = 0.5
-        label.Text = labelName
-        label.TextColor3 = Color3.fromRGB(255, 255, 255)
-        label.TextScaled = true
-        label.TextSize = 10
-        label.BorderSizePixel = 2
-        label.BorderColor3 = Color3.fromRGB(255, 255, 255)
-        label.Parent = tabContent
-
-        -- Update tab content size
-        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-
-        -- Ensure CanvasSize updates when new elements are added
-        tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-            tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-        end)
+function uiLibrary:addLabel(labelInfo)
+    local tabName = labelInfo.TabName
+    local labelName = labelInfo.Name
+    
+    local tabContent = uiLibrary.tabs[tabName]
+    if not tabContent then
+        warn("Tab not found: " .. tabName)
+        return
     end
 
-    return uiLibrary
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, -10, 0.1, 0)
+    label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    label.BackgroundTransparency = 0.5
+    label.Text = labelName
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.TextScaled = true
+    label.TextSize = 10
+    label.BorderSizePixel = 2
+    label.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    label.Parent = tabContent
+
+    -- Update tab content size
+    tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
+
+    -- Ensure CanvasSize updates when new elements are added
+    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
+    end)
 end
+
+return uiLibrary
