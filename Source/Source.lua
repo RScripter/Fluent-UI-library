@@ -29,8 +29,8 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
-    tabsLabel.Size = UDim2.new(0.2, 0, 0.05, 0)
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)
+    tabsLabel.Size = UDim2.new(0.75, 0, 0.1, 0) -- Match main frame width
+    tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0)
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
     tabsLabel.Text = "Tabs"
@@ -43,7 +43,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
-    mainFrame.Size = UDim2.new(0.75, 0, 0.75, 0) -- Adjusted width to fit within the window
+    mainFrame.Size = UDim2.new(0.75, 0, 0.7, 0) -- Adjusted width to fit within the window
     mainFrame.Position = UDim2.new(0.25, 0, 0.15, 0)
     mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     mainFrame.BackgroundTransparency = 0.5
@@ -55,7 +55,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the Scrolling Frame on the left side (Tabs Frame)
     local leftFrame = Instance.new("ScrollingFrame")
-    leftFrame.Size = UDim2.new(0.2, 0, 0.75, 0) -- Adjusted to match the height of mainFrame
+    leftFrame.Size = UDim2.new(0.2, 0, 0.7, 0) -- Adjusted to match the height of mainFrame
     leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0) -- Adjusted to align with tabsLabel
     leftFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     leftFrame.BackgroundTransparency = 0.5
@@ -83,13 +83,13 @@ function uiLibrary:addTab(tabInfo)
 
     -- Create the tab button
     local newTabButton = Instance.new("TextButton")
-    newTabButton.Size = UDim2.new(1, 0, 0.1, 0)
+    newTabButton.Size = UDim2.new(1, 0, 0.05, 0) -- Made smaller to match tab frame size
     newTabButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     newTabButton.BackgroundTransparency = 0.5
     newTabButton.Text = tabName
     newTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     newTabButton.TextScaled = true
-    newTabButton.TextSize = 14
+    newTabButton.TextSize = 12 -- Smaller text size
     newTabButton.TextStrokeTransparency = 0
     newTabButton.BorderSizePixel = 2
     newTabButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
@@ -137,13 +137,13 @@ function uiLibrary:addButton(buttonInfo)
     end
 
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, -10, 0.1, 0) -- Size similar to tab buttons
+    button.Size = UDim2.new(1, -10, 0.05, 0) -- Made smaller to match the tab button size
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BackgroundTransparency = 0.5
     button.Text = buttonName
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
     button.TextScaled = true
-    button.TextSize = 14
+    button.TextSize = 12 -- Smaller text size
     button.BorderSizePixel = 2
     button.BorderColor3 = Color3.fromRGB(255, 255, 255)
     button.Parent = tabContent
@@ -172,13 +172,13 @@ function uiLibrary:addLabel(labelInfo)
 
     -- Create a TextLabel for the tab
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, -10, 0.1, 0) -- Size similar to tab buttons
+    label.Size = UDim2.new(1, -10, 0.05, 0) -- Made smaller to match the tab button size
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
     label.Text = labelName
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.TextScaled = true
-    label.TextSize = 14
+    label.TextSize = 12 -- Smaller text size
     label.BorderSizePixel = 2
     label.BorderColor3 = Color3.fromRGB(255, 255, 255)
     label.Parent = tabContent
@@ -190,18 +190,6 @@ function uiLibrary:addLabel(labelInfo)
     tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
     end)
-end
-
--- Function to show/hide the entire UI
-function uiLibrary:toggleUI()
-    self.isVisible = not self.isVisible
-    self.screenGui.Enabled = self.isVisible
-end
-
--- Function to set the initial visibility of the UI
-function uiLibrary:setVisible(isVisible)
-    self.isVisible = isVisible
-    self.screenGui.Enabled = isVisible
 end
 
 return uiLibrary
