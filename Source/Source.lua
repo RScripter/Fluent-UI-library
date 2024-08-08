@@ -29,7 +29,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
-    tabsLabel.Size = UDim2.new(0.75, 0, 0.1, 0) -- Match main frame width
+    tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
     tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0)
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
@@ -83,13 +83,13 @@ function uiLibrary:addTab(tabInfo)
 
     -- Create the tab button
     local newTabButton = Instance.new("TextButton")
-    newTabButton.Size = UDim2.new(1, 0, 0.05, 0) -- Made smaller to match tab frame size
+    newTabButton.Size = UDim2.new(1, 0, 0.1, 0)
     newTabButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     newTabButton.BackgroundTransparency = 0.5
     newTabButton.Text = tabName
     newTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     newTabButton.TextScaled = true
-    newTabButton.TextSize = 12 -- Smaller text size
+    newTabButton.TextSize = 14
     newTabButton.TextStrokeTransparency = 0
     newTabButton.BorderSizePixel = 2
     newTabButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
@@ -137,13 +137,13 @@ function uiLibrary:addButton(buttonInfo)
     end
 
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, -10, 0.05, 0) -- Made smaller to match the tab button size
+    button.Size = UDim2.new(1, -10, 0.1, 0) -- Size similar to tab buttons
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BackgroundTransparency = 0.5
     button.Text = buttonName
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
     button.TextScaled = true
-    button.TextSize = 12 -- Smaller text size
+    button.TextSize = 14
     button.BorderSizePixel = 2
     button.BorderColor3 = Color3.fromRGB(255, 255, 255)
     button.Parent = tabContent
@@ -172,13 +172,13 @@ function uiLibrary:addLabel(labelInfo)
 
     -- Create a TextLabel for the tab
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, -10, 0.05, 0) -- Made smaller to match the tab button size
+    label.Size = UDim2.new(1, -10, 0.1, 0) -- Size similar to tab buttons
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
     label.Text = labelName
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.TextScaled = true
-    label.TextSize = 12 -- Smaller text size
+    label.TextSize = 14
     label.BorderSizePixel = 2
     label.BorderColor3 = Color3.fromRGB(255, 255, 255)
     label.Parent = tabContent
