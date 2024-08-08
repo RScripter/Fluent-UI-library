@@ -29,8 +29,8 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
-    tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0)
+    tabsLabel.Size = UDim2.new(0.2, 0, 0.05, 0)
+    tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
     tabsLabel.Text = "Tabs"
@@ -43,7 +43,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
-    mainFrame.Size = UDim2.new(0.75, 0, 0.7, 0) -- Adjusted width to fit within the window
+    mainFrame.Size = UDim2.new(0.75, 0, 0.75, 0) -- Adjusted width to fit within the window
     mainFrame.Position = UDim2.new(0.25, 0, 0.15, 0)
     mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     mainFrame.BackgroundTransparency = 0.5
@@ -55,7 +55,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the Scrolling Frame on the left side (Tabs Frame)
     local leftFrame = Instance.new("ScrollingFrame")
-    leftFrame.Size = UDim2.new(0.2, 0, 0.7, 0) -- Adjusted to match the height of mainFrame
+    leftFrame.Size = UDim2.new(0.2, 0, 0.75, 0) -- Adjusted to match the height of mainFrame
     leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0) -- Adjusted to align with tabsLabel
     leftFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     leftFrame.BackgroundTransparency = 0.5
@@ -190,6 +190,18 @@ function uiLibrary:addLabel(labelInfo)
     tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
     end)
+end
+
+-- Function to show/hide the entire UI
+function uiLibrary:toggleUI()
+    self.isVisible = not self.isVisible
+    self.screenGui.Enabled = self.isVisible
+end
+
+-- Function to set the initial visibility of the UI
+function uiLibrary:setVisible(isVisible)
+    self.isVisible = isVisible
+    self.screenGui.Enabled = isVisible
 end
 
 return uiLibrary
