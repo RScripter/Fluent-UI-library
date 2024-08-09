@@ -30,7 +30,7 @@ function uiLibrary:MakeWindow(windowInfo)
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
     tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0) -- Adjusted position to be above the tabs frame
+    tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0) -- Adjusted position to be above the tabs frame
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
     tabsLabel.Text = "Tabs"
@@ -148,9 +148,6 @@ function uiLibrary:addButton(buttonInfo)
     button.BorderColor3 = Color3.fromRGB(255, 255, 255)
     button.Parent = tabContent
 
-    -- Update tab content size
-    button.Size = UDim2.new(1, 0, 0.1, 0)
-
     -- Ensure CanvasSize updates when new elements are added
     tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
@@ -183,11 +180,8 @@ function uiLibrary:addLabel(labelInfo)
     label.BorderColor3 = Color3.fromRGB(255, 255, 255)
     label.Parent = tabContent
 
-    -- Update tab content size
-    label.Size = UDim2.new(1, 0, 0.1, 0)
-
     -- Ensure CanvasSize updates when new elements are added
-    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize:Connect(function()
+    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
     end)
 end
