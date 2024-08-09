@@ -98,3 +98,48 @@ uiLibrary:addLabel({
 - Ensure that tabs are added before adding buttons or labels to them.
 - The `uiLibrary` will automatically manage the visibility of tabs and their contents based on user interaction.
 - The `CanvasSize` of scrolling frames is automatically adjusted as new UI elements are added.
+
+#Example:
+```lua
+-- Load the UI library from a URL
+local uiLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/RScripter/Fluent-UI-library/main/Source/Source.lua"))()
+
+-- Create a window
+local window = uiLibrary:MakeWindow({
+    Name = "My Window"
+})
+
+-- Add a new tab
+uiLibrary:addTab({
+    Name = "Tab 1"
+})
+
+-- Add a button to the tab
+uiLibrary:addButton({
+    TabName = "Tab 1",
+    Name = "Click Me",
+    Function = function()
+        print("Button clicked!")
+    end
+})
+
+-- Add a label to the tab
+uiLibrary:addLabel({
+    TabName = "Tab 1",
+    Name = "This is a label"
+})
+
+-- Add another tab
+uiLibrary:addTab({
+    Name = "Tab 2"
+})
+
+-- Add a button to the second tab
+uiLibrary:addButton({
+    TabName = "Tab 2",
+    Name = "Another Button",
+    Function = function()
+        print("Another button clicked!")
+    end
+})
+```
