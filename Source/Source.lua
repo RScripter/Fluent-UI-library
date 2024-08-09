@@ -30,7 +30,7 @@ function uiLibrary:MakeWindow(windowInfo)
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
     tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0) -- Adjusted position to be above the tabs frame
+    tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0) -- Position above the tabs frame
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
     tabsLabel.Text = "Tabs"
@@ -56,7 +56,7 @@ function uiLibrary:MakeWindow(windowInfo)
     -- Create the Scrolling Frame on the left side (Tabs Frame)
     local leftFrame = Instance.new("ScrollingFrame")
     leftFrame.Size = UDim2.new(0.2, 0, 0.7, 0) -- Adjusted to match the height of mainFrame
-    leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0) -- Adjusted to align with tabsLabel
+    leftFrame.Position = UDim2.new(0.025, 0, 0.15, 0) -- Position aligned with tabsLabel
     leftFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     leftFrame.BackgroundTransparency = 0.5
     leftFrame.BorderSizePixel = 2
@@ -154,36 +154,6 @@ function uiLibrary:addButton(buttonInfo)
     end)
 
     button.MouseButton1Click:Connect(buttonFunction)
-end
-
--- Function to add a label to a tab
-function uiLibrary:addLabel(labelInfo)
-    local tabName = labelInfo.TabName
-    local labelName = labelInfo.Name
-    
-    local tabContent = uiLibrary.tabs[tabName]
-    if not tabContent then
-        warn("Tab not found: " .. tabName)
-        return
-    end
-
-    -- Create a TextLabel for the tab
-    local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, 0, 0.1, 0) -- Size same as tab buttons
-    label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    label.BackgroundTransparency = 0.5
-    label.Text = labelName
-    label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.TextScaled = true
-    label.TextSize = 14
-    label.BorderSizePixel = 2
-    label.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    label.Parent = tabContent
-
-    -- Ensure CanvasSize updates when new elements are added
-    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-    end)
 end
 
 -- Function to add a label to a tab
