@@ -99,7 +99,7 @@ uiLibrary:addLabel({
 - The `uiLibrary` will automatically manage the visibility of tabs and their contents based on user interaction.
 - The `CanvasSize` of scrolling frames is automatically adjusted as new UI elements are added.
 
-#Example:
+## Example:
 ```lua
 -- Load the UI library from a URL
 local uiLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/RScripter/Fluent-UI-library/main/Source/Source.lua"))()
