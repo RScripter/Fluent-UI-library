@@ -186,4 +186,34 @@ function uiLibrary:addLabel(labelInfo)
     end)
 end
 
+-- Function to add a label to a tab
+function uiLibrary:addLabel(labelInfo)
+    local tabName = labelInfo.TabName
+    local labelName = labelInfo.Name
+    
+    local tabContent = uiLibrary.tabs[tabName]
+    if not tabContent then
+        warn("Tab not found: " .. tabName)
+        return
+    end
+
+    -- Create a TextLabel for the tab
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, 0, 0.1, 0) -- Size same as tab buttons
+    label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    label.BackgroundTransparency = 0.5
+    label.Text = labelName
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.TextScaled = true
+    label.TextSize = 14
+    label.BorderSizePixel = 2
+    label.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    label.Parent = tabContent
+
+    -- Ensure CanvasSize updates when new elements are added
+    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
+    end)
+end
+
 return uiLibrary
