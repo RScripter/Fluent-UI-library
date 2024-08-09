@@ -30,7 +30,7 @@ function uiLibrary:MakeWindow(windowInfo)
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
     tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.05, 0) -- Position above the tabs frame
+    tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0) -- Adjusted position to be above the tabs frame
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
     tabsLabel.Text = "Tabs"
@@ -137,7 +137,7 @@ function uiLibrary:addButton(buttonInfo)
     end
 
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, -10, 0.1, 0) -- Main frame buttons remain smaller
+    button.Size = UDim2.new(1, 0, 0.1, 0) -- Size same as tab buttons
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BackgroundTransparency = 0.5
     button.Text = buttonName
@@ -149,14 +149,14 @@ function uiLibrary:addButton(buttonInfo)
     button.Parent = tabContent
 
     -- Update tab content size
-    tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-    
-    button.MouseButton1Click:Connect(buttonFunction)
+    button.Size = UDim2.new(1, 0, 0.1, 0)
 
     -- Ensure CanvasSize updates when new elements are added
     tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
     end)
+
+    button.MouseButton1Click:Connect(buttonFunction)
 end
 
 -- Function to add a label to a tab
@@ -172,7 +172,7 @@ function uiLibrary:addLabel(labelInfo)
 
     -- Create a TextLabel for the tab
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, -10, 0.1, 0) -- Main frame labels remain smaller
+    label.Size = UDim2.new(1, 0, 0.1, 0) -- Size same as tab buttons
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
     label.Text = labelName
@@ -184,10 +184,10 @@ function uiLibrary:addLabel(labelInfo)
     label.Parent = tabContent
 
     -- Update tab content size
-    tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-    
+    label.Size = UDim2.new(1, 0, 0.1, 0)
+
     -- Ensure CanvasSize updates when new elements are added
-tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize:Connect(function()
         tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
     end)
 end
