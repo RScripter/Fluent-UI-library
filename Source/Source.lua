@@ -27,10 +27,9 @@ function uiLibrary:MakeWindow(windowInfo)
     titleLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
     titleLabel.Parent = screenGui
 
-    -- Create the tabs label above the left frame
 local tabsLabel = Instance.new("TextLabel")
 tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-tabsLabel.Position = UDim2.new(0.025, 0, 0, 0) -- Position it above the leftFrame
+tabsLabel.Position = UDim2.new(0.025, 0, -0.1, 0) -- Position it above the leftFrame
 tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 tabsLabel.BackgroundTransparency = 0.5
 tabsLabel.Text = "Tabs"
@@ -193,9 +192,9 @@ end
 function uiLibrary:addTextboxLabel(labelInfo)
     local tabName = labelInfo.TabName
     local labelName = labelInfo.Name
-    local executeTimesFunction = labelInfo.Function
+    local onSubmitFunction = labelInfo.Function
 
-    local tabContent = uiLibrary.tabs[tabName]
+    local tabContent = self.tabs[tabName]
     if not tabContent then
         warn("Tab not found: " .. tabName)
         return
@@ -203,7 +202,7 @@ function uiLibrary:addTextboxLabel(labelInfo)
 
     -- Create a TextLabel for the label part of the TextBoxLabel
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0.6, 0, 0.1, 0) -- Adjust size as needed
+    label.Size = UDim2.new(0.7, 0, 0.1, 0)
     label.Position = UDim2.new(0, 0, 0, 0)
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
@@ -217,8 +216,8 @@ function uiLibrary:addTextboxLabel(labelInfo)
 
     -- Create a TextBox next to the TextLabel
     local textBox = Instance.new("TextBox")
-    textBox.Size = UDim2.new(0.4, 0, 0.1, 0) -- Adjust size as needed
-    textBox.Position = UDim2.new(0.6, 0, 0, 0) -- Positioned to the right of the TextLabel
+    textBox.Size = UDim2.new(0.3, 0, 0.1, 0)
+    textBox.Position = UDim2.new(0.7, 0, 0, 0)
     textBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     textBox.BackgroundTransparency = 0.5
     textBox.Text = ""
@@ -229,16 +228,16 @@ function uiLibrary:addTextboxLabel(labelInfo)
     textBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
     textBox.Parent = tabContent
 
-    -- Function to execute when the TextBox value changes
+    -- Function to handle the TextBox input
     textBox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
-            local number = tonumber(textBox.Text)
-            if number then
-                for _ = 1, number do
-                    executeTimesFunction()
+            local input = tonumber(textBox.Text)
+            if input then
+                for i = 1, input do
+                    onSubmitFunction(input)
                 end
             else
-                warn("Invalid number entered.")
+                onSubmitFunction(textBox.Text)
             end
         end
     end)
