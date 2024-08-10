@@ -33,22 +33,19 @@ tabFrame.Position = UDim2.new(0, 0, 0, 0) -- Adjust position as needed
 tabFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 tabFrame.Parent = window  -- Assuming window is your main UI frame
 
-local ScreenGui = Instance.new("ScreenGui")
-local TabsLabel = Instance.new("TextLabel")
-
-ScreenGui.Parent = game.CoreGui
-
--- Tabs Label setup
-TabsLabel.Name = "TabsLabel"
-TabsLabel.Parent = ScreenGui
-TabsLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TabsLabel.BackgroundTransparency = 1
-TabsLabel.Size = UDim2.new(0, 100, 0, 25) -- Set to your desired width and height
-TabsLabel.Position = UDim2.new(0.05, 0, 0.05, 0) -- Adjust position above the tabs frame
-TabsLabel.Font = Enum.Font.SourceSans
-TabsLabel.Text = "Tabs"
-TabsLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-TabsLabel.TextSize = 20
+-- for cool looking lol
+local tabsLabel = Instance.new("TextLabel")
+tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0) -- Match the width of the tabs frame
+tabsLabel.Position = UDim2.new(0.025, 0, 0.05, 0) -- Positioned above the tabs frame
+tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Black background
+tabsLabel.BackgroundTransparency = 0.5
+tabsLabel.Text = "Features"
+tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text color
+tabsLabel.TextScaled = true
+tabsLabel.TextSize = 14
+tabsLabel.BorderSizePixel = 2
+tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255) -- White outline
+tabsLabel.Parent = screenGui
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
