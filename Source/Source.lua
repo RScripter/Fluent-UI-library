@@ -27,18 +27,21 @@ function uiLibrary:MakeWindow(windowInfo)
     titleLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
     titleLabel.Parent = screenGui
 
+local tabFrame = Instance.new("Frame")
+tabFrame.Size = UDim2.new(0.25, 0, 1, 0)  -- Adjust size as needed
+tabFrame.Position = UDim2.new(0, 0, 0, 0) -- Adjust position as needed
+tabFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+tabFrame.Parent = window  -- Assuming window is your main UI frame
+
+-- Now create the "Tabs" TextLabel:
 local tabsLabel = Instance.new("TextLabel")
-tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-tabsLabel.Position = UDim2.new(0.025, 0, 0, 0) -- Position it above the leftFrame
-tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-tabsLabel.BackgroundTransparency = 0.5
+tabsLabel.Size = UDim2.new(1, 0, 0.1, 0)  -- Make it as wide as the tabFrame and adjust height as needed
+tabsLabel.Position = UDim2.new(0, 0, -0.1, 0) -- Position it above the tabFrame by adjusting the Y scale
+tabsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 tabsLabel.Text = "Tabs"
 tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 tabsLabel.TextScaled = true
-tabsLabel.TextSize = 14
-tabsLabel.BorderSizePixel = 2
-tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
-tabsLabel.Parent = screenGui
+tabsLabel.Parent = tabFrame -- Attach it to the tab frame
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
