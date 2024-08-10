@@ -28,18 +28,18 @@ function uiLibrary:MakeWindow(windowInfo)
     titleLabel.Parent = screenGui
 
     -- Create the tabs label above the tabs frame
-    local tabsLabel = Instance.new("TextLabel")
-    tabsLabel.Size = UDim2.new(0.2, 0, titleLabel.Size.Y.Scale, titleLabel.Size.Y.Offset)  -- Match the height of titleLabel
-    tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)
-    tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    tabsLabel.BackgroundTransparency = 0.5
-    tabsLabel.Text = "Tabs"
-    tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    tabsLabel.TextScaled = true
-    tabsLabel.TextSize = 14
-    tabsLabel.BorderSizePixel = 2
-    tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    tabsLabel.Parent = screenGui
+local tabsLabel = Instance.new("TextLabel")
+tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Adjust the size as needed
+tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)  -- Position it above the tabs frame
+tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+tabsLabel.BackgroundTransparency = 0.5
+tabsLabel.Text = "Tabs"
+tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+tabsLabel.TextScaled = true
+tabsLabel.TextSize = 14
+tabsLabel.BorderSizePixel = 2
+tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+tabsLabel.Parent = screenGui
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
