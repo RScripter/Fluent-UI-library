@@ -33,15 +33,21 @@ tabFrame.Position = UDim2.new(0, 0, 0, 0) -- Adjust position as needed
 tabFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 tabFrame.Parent = window  -- Assuming window is your main UI frame
 
--- Now create the "Tabs" TextLabel:
+-- Assuming you have a ScreenGui called 'screenGui' and a frame for the tabs called 'tabsFrame'
+
+-- Create the "Tabs" label
 local tabsLabel = Instance.new("TextLabel")
-tabsLabel.Size = UDim2.new(1, 0, 0.1, 0)  -- Make it as wide as the tabFrame and adjust height as needed
-tabsLabel.Position = UDim2.new(0, 0, -0.1, 0) -- Position it above the tabFrame by adjusting the Y scale
-tabsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+tabsLabel.Size = UDim2.new(0, tabsFrame.Size.X.Offset, 0, 30) -- Same width as the tabs frame, height of 30 pixels
+tabsLabel.Position = UDim2.new(0, tabsFrame.Position.X.Offset, 0, tabsFrame.Position.Y.Offset - 35) -- Position it just above the tabs frame
+tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+tabsLabel.BackgroundTransparency = 0.5
 tabsLabel.Text = "Tabs"
 tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 tabsLabel.TextScaled = true
-tabsLabel.Parent = tabFrame -- Attach it to the tab frame
+tabsLabel.TextSize = 14
+tabsLabel.BorderSizePixel = 2
+tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+tabsLabel.Parent = screenGui
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
