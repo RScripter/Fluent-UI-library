@@ -29,7 +29,7 @@ function uiLibrary:MakeWindow(windowInfo)
 
     -- Create the tabs label above the tabs frame
     local tabsLabel = Instance.new("TextLabel")
-    tabsLabel.Size = UDim2.new(0.2, 0, 0.05, 0)
+    tabsLabel.Size = UDim2.new(0.2, 0, titleLabel.Size.Y.Scale, titleLabel.Size.Y.Offset)  -- Match the height of titleLabel
     tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)
     tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     tabsLabel.BackgroundTransparency = 0.5
@@ -184,9 +184,9 @@ function uiLibrary:addLabel(labelInfo)
     label.Parent = tabContent
 
     -- Ensure CanvasSize updates when new elements are added
-    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-    end)
+tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
+end)
 end
 
 return uiLibrary
