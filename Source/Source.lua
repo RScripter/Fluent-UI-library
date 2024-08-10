@@ -193,6 +193,7 @@ end
 function uiLibrary:addTextBoxLabel(labelInfo)
     local tabName = labelInfo.TabName
     local labelName = labelInfo.Name
+    local onTextChanged = labelInfo.Function
 
     local tabContent = uiLibrary.tabs[tabName]
     if not tabContent then
@@ -227,6 +228,13 @@ function uiLibrary:addTextBoxLabel(labelInfo)
     textBox.BorderSizePixel = 2
     textBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
     textBox.Parent = tabContent
+
+    -- Connect the TextBox's TextChanged event to the provided function
+    textBox:GetPropertyChangedSignal("Text"):Connect(function()
+        if onTextChanged then
+            onTextChanged()
+        end
+    end)
 
     -- Ensure CanvasSize updates when new elements are added
     tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
