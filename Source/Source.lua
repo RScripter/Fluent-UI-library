@@ -28,18 +28,18 @@ function uiLibrary:MakeWindow(windowInfo)
     titleLabel.Parent = screenGui
 
     -- Create the tabs label above the tabs frame
-local tabsLabel = Instance.new("TextLabel")
-tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Adjust the size as needed
-tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)  -- Position it above the tabs frame
-tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-tabsLabel.BackgroundTransparency = 0.5
-tabsLabel.Text = "Tabs"
-tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-tabsLabel.TextScaled = true
-tabsLabel.TextSize = 14
-tabsLabel.BorderSizePixel = 2
-tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
-tabsLabel.Parent = screenGui
+    local tabsLabel = Instance.new("TextLabel")
+    tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
+    tabsLabel.Position = UDim2.new(0.025, 0, 0.1, 0)
+    tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    tabsLabel.BackgroundTransparency = 0.5
+    tabsLabel.Text = "Tabs"
+    tabsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tabsLabel.TextScaled = true
+    tabsLabel.TextSize = 14
+    tabsLabel.BorderSizePixel = 2
+    tabsLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    tabsLabel.Parent = screenGui
 
     -- Create the main Scrolling Frame
     local mainFrame = Instance.new("ScrollingFrame")
@@ -62,10 +62,10 @@ tabsLabel.Parent = screenGui
     leftFrame.BorderSizePixel = 2
     leftFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
     leftFrame.ScrollBarThickness = 10
-    leftFrame.CanvasSize = UDim2.new(0, 0, 0, 0)  -- Disable horizontal scrolling by setting X-axis CanvasSize to 0
+    leftFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
     leftFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.None
     leftFrame.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
-    leftFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y -- Automatically adjust vertical scrolling
+    leftFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
     leftFrame.Parent = screenGui
 
     -- Create UIListLayout for the leftFrame
@@ -140,7 +140,7 @@ function uiLibrary:addButton(buttonInfo)
     end
 
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, 0, 0.1, 0) -- Matches the height of the tabs
+    button.Size = UDim2.new(1, 0, 0.1, 0)
     button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     button.BackgroundTransparency = 0.5
     button.Text = buttonName
@@ -172,7 +172,7 @@ function uiLibrary:addLabel(labelInfo)
 
     -- Create a TextLabel for the tab
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, 0, 0.1, 0) -- Matches the height of the tabs
+    label.Size = UDim2.new(1, 0, 0.1, 0)
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
     label.Text = labelName
@@ -184,9 +184,54 @@ function uiLibrary:addLabel(labelInfo)
     label.Parent = tabContent
 
     -- Ensure CanvasSize updates when new elements are added
-tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-    tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
-end)
+    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
+    end)
+end
+
+-- Function to add a TextBoxLabel to a tab
+function uiLibrary:addTextBoxLabel(labelInfo)
+    local tabName = labelInfo.TabName
+    local labelName = labelInfo.Name
+
+    local tabContent = uiLibrary.tabs[tabName]
+    if not tabContent then
+        warn("Tab not found: " .. tabName)
+        return
+    end
+
+    -- Create a TextLabel for the label part of the TextBoxLabel
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0.7, 0, 0.1, 0) -- Adjust size as needed
+    label.Position = UDim2.new(0, 0, 0, 0)
+    label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    label.BackgroundTransparency = 0.5
+    label.Text = labelName
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.TextScaled = true
+    label.TextSize = 14
+    label.BorderSizePixel = 2
+    label.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    label.Parent = tabContent
+
+    -- Create a TextBox next to the TextLabel
+    local textBox = Instance.new("TextBox")
+    textBox.Size = UDim2.new(0.3, 0, 0.1, 0) -- Adjust size as needed
+    textBox.Position = UDim2.new(0.7, 0, 0, 0) -- Positioned to the right of the TextLabel
+    textBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    textBox.BackgroundTransparency = 0.5
+    textBox.Text = ""
+    textBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textBox.TextScaled = true
+    textBox.TextSize = 14
+    textBox.BorderSizePixel = 2
+    textBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    textBox.Parent = tabContent
+
+    -- Ensure CanvasSize updates when new elements are added
+    tabContent.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        tabContent.CanvasSize = UDim2.new(0, 0, 0, tabContent.UIListLayout.AbsoluteContentSize.Y)
+    end)
 end
 
 return uiLibrary
