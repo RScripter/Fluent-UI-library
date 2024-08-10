@@ -189,7 +189,7 @@ function uiLibrary:addLabel(labelInfo)
     end)
 end
 
--- Function to add a TextBoxLabel to a tab
+-- Function to add a TextBox with counting functionality
 function uiLibrary:addTextboxLabel(labelInfo)
     local tabName = labelInfo.TabName
     local labelName = labelInfo.Name
@@ -248,7 +248,7 @@ function uiLibrary:addTextboxLabel(labelInfo)
         local text = textBox.Text
         local number = tonumber(text)
         if number then
-            local count = number * number -- Example function: count occurrences of a number (you can adjust this logic)
+            local count = number * number -- Example: Count of the number is the number squared
             resultLabel.Text = "Count: " .. count
             countFunction(number) -- Call the provided function with the number
         else
