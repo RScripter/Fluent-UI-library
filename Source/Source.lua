@@ -30,7 +30,7 @@ function uiLibrary:MakeWindow(windowInfo)
     -- Create the tabs label above the left frame
 local tabsLabel = Instance.new("TextLabel")
 tabsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
-tabsLabel.Position = UDim2.new(0.025, 0, 0.15, 0) -- Position it above the leftFrame
+tabsLabel.Position = UDim2.new(0.025, 0, 0.30, 0) -- Position it above the leftFrame
 tabsLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 tabsLabel.BackgroundTransparency = 0.5
 tabsLabel.Text = "Tabs"
