@@ -189,11 +189,11 @@ function uiLibrary:addLabel(labelInfo)
     end)
 end
 
--- Function to add a TextBox with counting functionality
+-- Function to add a TextBoxLabel to a tab
 function uiLibrary:addTextboxLabel(labelInfo)
     local tabName = labelInfo.TabName
     local labelName = labelInfo.Name
-    local countFunction = labelInfo.Function or function() end -- Default to empty function if not provided
+    local executeTimesFunction = labelInfo.Function
 
     local tabContent = uiLibrary.tabs[tabName]
     if not tabContent then
@@ -203,7 +203,7 @@ function uiLibrary:addTextboxLabel(labelInfo)
 
     -- Create a TextLabel for the label part of the TextBoxLabel
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0.7, 0, 0.1, 0) -- Adjust size as needed
+    label.Size = UDim2.new(0.6, 0, 0.1, 0) -- Adjust size as needed
     label.Position = UDim2.new(0, 0, 0, 0)
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
@@ -217,8 +217,8 @@ function uiLibrary:addTextboxLabel(labelInfo)
 
     -- Create a TextBox next to the TextLabel
     local textBox = Instance.new("TextBox")
-    textBox.Size = UDim2.new(0.3, 0, 0.1, 0) -- Adjust size as needed
-    textBox.Position = UDim2.new(0.7, 0, 0, 0) -- Positioned to the right of the TextLabel
+    textBox.Size = UDim2.new(0.4, 0, 0.1, 0) -- Adjust size as needed
+    textBox.Position = UDim2.new(0.6, 0, 0, 0) -- Positioned to the right of the TextLabel
     textBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     textBox.BackgroundTransparency = 0.5
     textBox.Text = ""
@@ -229,30 +229,17 @@ function uiLibrary:addTextboxLabel(labelInfo)
     textBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
     textBox.Parent = tabContent
 
-    -- Create a TextLabel to display the count result
-    local resultLabel = Instance.new("TextLabel")
-    resultLabel.Size = UDim2.new(1, 0, 0.1, 0)
-    resultLabel.Position = UDim2.new(0, 0, 0.1, 0)
-    resultLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    resultLabel.BackgroundTransparency = 0.5
-    resultLabel.Text = "Count: 0"
-    resultLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    resultLabel.TextScaled = true
-    resultLabel.TextSize = 14
-    resultLabel.BorderSizePixel = 2
-    resultLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    resultLabel.Parent = tabContent
-
-    -- Update count when the TextBox text changes
-    textBox:GetPropertyChangedSignal("Text"):Connect(function()
-        local text = textBox.Text
-        local number = tonumber(text)
-        if number then
-            local count = number * number -- Example: Count of the number is the number squared
-            resultLabel.Text = "Count: " .. count
-            countFunction(number) -- Call the provided function with the number
-        else
-            resultLabel.Text = "Invalid number"
+    -- Function to execute when the TextBox value changes
+    textBox.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            local number = tonumber(textBox.Text)
+            if number then
+                for _ = 1, number do
+                    executeTimesFunction()
+                end
+            else
+                warn("Invalid number entered.")
+            end
         end
     end)
 
