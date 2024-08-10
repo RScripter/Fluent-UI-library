@@ -195,7 +195,6 @@ function uiLibrary:addLabel(labelInfo)
     end)
 end
 
--- Function to add a TextBoxLabel to a tab
 function uiLibrary:addTextBoxLabel(labelInfo)
     local tabName = labelInfo.TabName
     local labelName = labelInfo.Name
@@ -207,41 +206,33 @@ function uiLibrary:addTextBoxLabel(labelInfo)
         return
     end
 
-    -- Create a container frame to hold the label and textbox
-    local container = Instance.new("Frame")
-    container.Size = UDim2.new(1, 0, 0.1, 0)  -- Adjust size as needed
-    container.BackgroundTransparency = 1
-    container.Parent = tabContent
-
     -- Create a TextLabel for the label part of the TextBoxLabel
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0.7, 0, 1, 0)  -- Adjust size as needed
+    label.Size = UDim2.new(0.5, -5, 0, 50)  -- Adjust size as needed
     label.Position = UDim2.new(0, 0, 0, 0)
     label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     label.BackgroundTransparency = 0.5
     label.Text = labelName
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.TextScaled = true
-    label.TextSize = 14
     label.BorderSizePixel = 2
     label.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    label.Parent = container
+    label.Parent = tabContent
 
     -- Create a TextBox next to the TextLabel
     local textBox = Instance.new("TextBox")
-    textBox.Size = UDim2.new(0.3, 0, 1, 0)  -- Adjust size as needed
-    textBox.Position = UDim2.new(0.7, 0, 0, 0)  -- Positioned to the right of the TextLabel
+    textBox.Size = UDim2.new(0.5, -5, 0, 50)  -- Adjust size as needed
+    textBox.Position = UDim2.new(0.5, 5, 0, 0)  -- Positioned to the right of the TextLabel
     textBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     textBox.BackgroundTransparency = 0.5
     textBox.Text = ""
     textBox.TextColor3 = Color3.fromRGB(255, 255, 255)
     textBox.TextScaled = true
-    textBox.TextSize = 14
     textBox.BorderSizePixel = 2
     textBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    textBox.Parent = container
+    textBox.Parent = tabContent
 
-    -- Connect the TextBox's TextChanged event to the function
+    -- Connect the TextBox's FocusLost event to the function
     textBox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
             local number = tonumber(textBox.Text)
