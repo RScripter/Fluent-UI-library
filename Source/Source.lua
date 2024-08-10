@@ -190,10 +190,10 @@ function uiLibrary:addLabel(labelInfo)
 end
 
 -- Function to add a TextBoxLabel to a tab
-function uiLibrary:addTextBoxLabel(labelInfo)
+function uiLibrary:addTextboxLabel(labelInfo)
     local tabName = labelInfo.TabName
     local labelName = labelInfo.Name
-    local onTextChanged = labelInfo.Function
+    local countFunction = labelInfo.Function or function() end -- Default to empty function if not provided
 
     local tabContent = uiLibrary.tabs[tabName]
     if not tabContent then
@@ -229,10 +229,30 @@ function uiLibrary:addTextBoxLabel(labelInfo)
     textBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
     textBox.Parent = tabContent
 
-    -- Connect the TextBox's TextChanged event to the provided function
+    -- Create a TextLabel to display the count result
+    local resultLabel = Instance.new("TextLabel")
+    resultLabel.Size = UDim2.new(1, 0, 0.1, 0)
+    resultLabel.Position = UDim2.new(0, 0, 0.1, 0)
+    resultLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    resultLabel.BackgroundTransparency = 0.5
+    resultLabel.Text = "Count: 0"
+    resultLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    resultLabel.TextScaled = true
+    resultLabel.TextSize = 14
+    resultLabel.BorderSizePixel = 2
+    resultLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    resultLabel.Parent = tabContent
+
+    -- Update count when the TextBox text changes
     textBox:GetPropertyChangedSignal("Text"):Connect(function()
-        if onTextChanged then
-            onTextChanged()
+        local text = textBox.Text
+        local number = tonumber(text)
+        if number then
+            local count = number * number -- Example function: count occurrences of a number (you can adjust this logic)
+            resultLabel.Text = "Count: " .. count
+            countFunction(number) -- Call the provided function with the number
+        else
+            resultLabel.Text = "Invalid number"
         end
     end)
 
